@@ -1,3 +1,4 @@
 
 *.class
 .settings
+src/test/files

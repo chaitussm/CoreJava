@@ -31,7 +31,7 @@ public class CreateFile {
 	
 	public static void main(String[] args) throws Exception
     {
-		 f2 = new File("D:\\","bc.txt");
+		 f2 = new File("src/test/files","bc.txt");
 		 boolean a = f2.createNewFile();
 		 System.out.println(a);
 		 boolean b = f2.exists();
@@ -42,3 +42,4 @@ public class CreateFile {
 	}
 
 }
+

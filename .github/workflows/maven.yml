@@ -39,30 +39,5 @@ jobs:
       with:
         name: test-report
         path: CoreJava_Project/target/site/
-
-    - name: Send email with test report
-      uses: dawidd6/action-send-mail@v3
-      if: always()
-      with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        secure: false
-        tls: true
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
-        subject: "CoreJava Test Report - ${{ github.ref_name }} - Run #${{ github.run_number }}"
-        to: chaitanyassm@outlook.com
-        from: qaengine252@gmail.com
-        body: |
-          CoreJava Test Execution Report
-
-          Repository: ${{ github.repository }}
-          Branch: ${{ github.ref_name }}
-          Commit: ${{ github.sha }}
-          Run: ${{ github.run_number }}
-
-          The HTML test report is available as a GitHub Actions artifact at:
-          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-          Please download the artifact named 'test-report' for the full HTML report.
+               Please download the artifact named 'test-report' for the full HTML report.
         attachments: CoreJava_Project/target/site/surefire-report.html

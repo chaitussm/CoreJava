@@ -1,0 +1,6 @@
+target/
+*.class
+CoreJava_Project/bc.xls
+CoreJava_Project/dc.txt
+CoreJava_Project/file.txt
+CoreJava_Project/target/

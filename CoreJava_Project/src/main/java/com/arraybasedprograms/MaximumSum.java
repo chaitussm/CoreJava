@@ -1,6 +1,6 @@
 package com.arraybasedprograms;
 
-class MaximumSum
+public class MaximumSum
 {
 	/*Function to return max sum such that no two elements
 	are adjacent */

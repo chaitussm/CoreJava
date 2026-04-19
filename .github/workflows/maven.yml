@@ -25,13 +25,61 @@ jobs:
     - name: Create required test directories
       run: mkdir -p CoreJava_Project/src/test/files
 
-    - name: Build and run tests with Maven
-      run: mvn -f CoreJava_Project/pom.xml clean test --no-transfer-progress
+    - name: Display Java version
+      run: |
+        echo "=========================================="
+        echo "Java Version Information"
+        echo "=========================================="
+        java -version
+        javac -version
+        echo "=========================================="
+
+    - name: Build and run tests with Maven (Verbose Output)
+      run: |
+        echo "=========================================="
+        echo "Starting Maven Build and Tests"
+        echo "=========================================="
+        mvn -f CoreJava_Project/pom.xml clean test -Dverbose
+        echo "=========================================="
       continue-on-error: true
 
+    - name: Display Test Results
+      if: always()
+      run: |
+        echo "=========================================="
+        echo "Test Execution Summary"
+        echo "=========================================="
+        if [ -d "CoreJava_Project/target/surefire-reports" ]; then
+          echo "Test Reports Found:"
+          ls -la CoreJava_Project/target/surefire-reports/
+          echo ""
+          echo "Test Output:"
+          find CoreJava_Project/target/surefire-reports -name "*.txt" -exec cat {} \;
+        else
+          echo "No test reports directory found"
+        fi
+        echo "=========================================="
+
     - name: Generate Surefire HTML report
-      run: mvn -f CoreJava_Project/pom.xml surefire-report:report-only site:attach-descriptor --no-transfer-progress
+      run: |
+        echo "=========================================="
+        echo "Generating HTML Test Report"
+        echo "=========================================="
+        mvn -f CoreJava_Project/pom.xml surefire-report:report-only site:attach-descriptor -Dverbose
+        echo "=========================================="
       continue-on-error: true
+
+    - name: Display Build Summary
+      if: always()
+      run: |
+        echo "=========================================="
+        echo "Build and Test Artifacts"
+        echo "=========================================="
+        if [ -d "CoreJava_Project/target" ]; then
+          echo "Target directory contents:"
+          ls -lh CoreJava_Project/target/ | head -20
+        fi
+        echo "=========================================="
 
     - name: Upload test report as artifact
       uses: actions/upload-artifact@v4
@@ -39,5 +87,10 @@ jobs:
       with:
         name: test-report
         path: CoreJava_Project/target/site/
-               Please download the artifact named 'test-report' for the full HTML report.
-        attachments: CoreJava_Project/target/site/surefire-report.html
+
+    - name: Upload surefire reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: surefire-reports
+        path: CoreJava_Project/target/surefire-reports/

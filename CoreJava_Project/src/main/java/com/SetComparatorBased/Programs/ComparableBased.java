@@ -8,9 +8,8 @@ public class ComparableBased {
          System.out.println("A".compareTo("Z"));
          System.out.println("Z".compareTo("K"));
          System.out.println("A".compareTo("A"));
-         System.out.println("A".compareTo(null));
-
-          //NOte after java 1.7 version null is not allowed in the set based interfaces
+         // Note: after Java 1.7, null is not allowed in set-based interfaces
+         System.out.println("compareTo(null) throws NullPointerException");
 
 	}
 

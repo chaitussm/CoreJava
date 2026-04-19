@@ -4,10 +4,9 @@ public class Sapiens {
 
 	public static void main(String[] args) {
 
-		
 		test(10);
 		test(new Integer(10));
-		test((Integer)null);
+		test((Integer) 0);
 	}
 
 	

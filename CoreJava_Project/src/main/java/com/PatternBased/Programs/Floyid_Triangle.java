@@ -2,7 +2,7 @@ package com.PatternBased.Programs;
 
 import java.util.Scanner;
 
-class Floyid_Triangle
+public class Floyid_Triangle
 {
  public static void main(String args[])
  {

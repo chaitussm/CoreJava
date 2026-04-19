@@ -43,6 +43,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 587
         secure: false
+        tls: true
         username: ${{ secrets.SMTP_USERNAME }}
         password: ${{ secrets.SMTP_PASSWORD }}
         subject: "CoreJava Test Report - ${{ github.ref_name }} - Run #${{ github.run_number }}"
@@ -61,4 +62,3 @@ jobs:
 
           Please download the artifact named 'test-report' for the full HTML report.
         attachments: CoreJava_Project/target/site/surefire-report.html
-        ignore_cert: true
